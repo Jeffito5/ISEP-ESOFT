@@ -1,0 +1,22 @@
+@startuml
+autonumber
+actor "Freelancer" as UNR
+
+activate UNR
+UNR -> ":Sistema" : inicia a remoção de uma candidatura de um anúncio
+activate ":Sistema"
+":Sistema" --> UNR : apresenta a lista de anúncios elegíveis para ser removidos
+deactivate ":Sistema"
+
+UNR -> ":Sistema" : seleciona o anúncio que pretende remover a candidatura
+activate ":Sistema"
+":Sistema" --> UNR :  apresenta dados da candidatura e solicita confirmacao
+deactivate ":Sistema"
+
+UNR -> ":Sistema" : confirma
+activate ":Sistema"
+":Sistema" --> UNR : retira a candidatura e informa o freelancer do sucesso da operação
+deactivate ":Sistema"
+
+deactivate UNR
+@enduml

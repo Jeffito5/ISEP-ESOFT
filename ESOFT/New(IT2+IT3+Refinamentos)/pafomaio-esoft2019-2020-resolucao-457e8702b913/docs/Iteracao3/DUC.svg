@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="442px" preserveAspectRatio="none" style="width:652px;height:442px;" version="1.1" viewBox="0 0 652 442" width="652px" zoomAndPan="magnify"><defs><filter height="300%" id="f1lhrc2fixul7d" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><ellipse cx="432.9298" cy="304.586" fill="#FEFECE" filter="url(#f1lhrc2fixul7d)" rx="145.9298" ry="31.586" style="stroke: #A80036; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="274" x="295.9298" y="309.2344">UC11 - Atualizar Candidatura Submetida</text><ellipse cx="433.212" cy="401.3424" fill="#FEFECE" filter="url(#f1lhrc2fixul7d)" rx="139.712" ry="30.3424" style="stroke: #A80036; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="261" x="302.712" y="405.9908">UC12 - Retirar Candidatura Submetida</text><ellipse cx="433.0876" cy="167.5175" fill="#FEFECE" filter="url(#f1lhrc2fixul7d)" rx="208.0876" ry="44.0175" style="stroke: #A80036; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="402" x="232.0876" y="172.166">UC13 - Seriar (automaticamente) Candidatura de Anúncios</text><ellipse cx="432.8697" cy="49.5739" fill="#FEFECE" filter="url(#f1lhrc2fixul7d)" rx="175.8697" ry="37.5739" style="stroke: #A80036; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="336" x="264.8697" y="54.2224">UC14 - Adjudicar/Atribuir (manualmente) Anúncio</text><!--MD5=[254daa4c0aa61d7f44e2a06cbfcf4906]
+entity FRL--><ellipse cx="85.5" cy="299" fill="#FEFECE" filter="url(#f1lhrc2fixul7d)" rx="8" ry="8" style="stroke: #A80036; stroke-width: 2.0;"/><path d="M85.5,307 L85.5,334 M72.5,315 L98.5,315 M85.5,334 L72.5,349 M85.5,334 L98.5,349 " fill="none" filter="url(#f1lhrc2fixul7d)" style="stroke: #A80036; stroke-width: 2.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="73" x="49" y="368.9951">Freelancer</text><!--MD5=[c6ddddda358f072e4f19aa798de5fbe9]
+entity TM--><ellipse cx="85.5" cy="136" fill="#FEFECE" filter="url(#f1lhrc2fixul7d)" rx="8" ry="8" style="stroke: #A80036; stroke-width: 2.0;"/><path d="M85.5,144 L85.5,171 M72.5,152 L98.5,152 M85.5,171 L72.5,186 M85.5,171 L98.5,186 " fill="none" filter="url(#f1lhrc2fixul7d)" style="stroke: #A80036; stroke-width: 2.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="39" x="66" y="205.9951">Timer</text><!--MD5=[aba3a422084821251358def362bf37bd]
+entity GO--><ellipse cx="85.5" cy="18" fill="#FEFECE" filter="url(#f1lhrc2fixul7d)" rx="8" ry="8" style="stroke: #A80036; stroke-width: 2.0;"/><path d="M85.5,26 L85.5,53 M72.5,34 L98.5,34 M85.5,53 L72.5,68 M85.5,53 L98.5,68 " fill="none" filter="url(#f1lhrc2fixul7d)" style="stroke: #A80036; stroke-width: 2.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="159" x="6" y="87.9951">Gestor de Organização</text><!--MD5=[5f7cb9f8884ff50d92720e9124d84a00]
+link GO to UC14--><path d="M165.2235,49.5 C191.1741,49.5 221.1292,49.5 251.4026,49.5 " fill="none" id="GO-&gt;UC14" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="256.6592,49.5,247.6592,45.5,251.6592,49.5,247.6592,53.5,256.6592,49.5" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[5f400686cbd9d5e585c1c3132b0d60f7]
+link FRL to UC11--><path d="M122.0318,327.7667 C161.9471,324.7802 228.3885,319.8091 289.6321,315.2268 " fill="none" id="FRL-&gt;UC11" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="294.7842,314.8413,285.5108,311.5241,289.7981,315.2144,286.1078,319.5018,294.7842,314.8413" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[094edc4e287363ae8660b7d893da846e]
+link FRL to UC12--><path d="M122.0318,337.9641 C170.0204,347.7689 256.3507,365.4076 325.8934,379.6163 " fill="none" id="FRL-&gt;UC12" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="330.8707,380.6333,322.8537,374.9125,325.9719,379.6323,321.2521,382.7506,330.8707,380.6333" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[90891dee134af5f3fd466b9bea14d01f]
+link TM to UC13--><path d="M105.1788,167.5 C129.1443,167.5 172.3258,167.5 219.6469,167.5 " fill="none" id="TM-&gt;UC13" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="224.8354,167.5,215.8354,163.5,219.8354,167.5,215.8354,171.5,224.8354,167.5" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[db6b36eedbc3cf961784e16c5669ab70]
+@startuml
+usecase UC11 as "UC11 - Atualizar Candidatura Submetida"
+usecase UC12 as "UC12 - Retirar Candidatura Submetida "
+usecase UC13 as "UC13 - Seriar (automaticamente) Candidatura de Anúncios"
+usecase UC14 as "UC14 - Adjudicar/Atribuir (manualmente) Anúncio"
+
+actor "Freelancer" as FRL
+actor "Timer" as TM
+actor "Gestor de Organização" as GO
+
+
+
+left to right direction
+GO - ->(UC14)
+
+FRL - ->(UC11)
+FRL - ->(UC12)
+
+TM - ->(UC13)
+@enduml
+
+PlantUML version 1.2019.12(Sun Nov 03 10:24:54 UTC 2019)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 1.8.0_232-heroku-b09
+Operating System: Linux
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

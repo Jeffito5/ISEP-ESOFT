@@ -1,0 +1,45 @@
+@startuml
+
+class AreaAtividade {
+  -String codigo
+  -String descBreve
+  -String descDetalhada
+}
+
+class CompetenciaTecnica{
+  -String cod
+  -String descBreve
+  -String descDet
+
+  CompetenciaTecnica(String cod, String descBreve, String descDet, Stirng areaAtividade)
+}
+
+class Plataforma {
+  -String designacao
+  
+  getAreaAtividade()
+  AreaAtividade getAreaAtividade(String id)
+  Competencia novaCompetenciaTecnica(String cod, String descBreve, String descDet,  areaAtividade)
+  validaCompetenciaTecnica(CompetenciaTecnica)
+  registaCompetenciaTecnica(CompetenciaTecnica) 
+  - addCompetenciaTecnica(CompetenciaTecnica) 
+}
+
+class EspecificarCompetenciaTecnicaController {
+  getAreaAtividade()
+  novaCompetenciaTecnica(String cod, String dsBreve, String dsDet,id: areaAtividade)
+  registaCompetenciaTecnica() 
+}
+
+class EspecificarCompetenciaTecnicaUI {
+  
+}
+
+EspecificarCompetenciaTecnicaUI ..> EspecificarCompetenciaTecnicaController 
+EspecificarCompetenciaTecnicaController ..> Plataforma
+EspecificarCompetenciaTecnicaController ..> CompetenciaTecnica
+Plataforma "1" --> "*" AreaAtividade : possui
+CompetenciaTecnica "1" -->"1" AreaAtividade : referente a
+
+
+@enduml

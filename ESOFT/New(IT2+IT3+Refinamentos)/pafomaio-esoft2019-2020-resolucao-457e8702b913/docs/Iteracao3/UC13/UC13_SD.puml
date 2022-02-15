@@ -1,0 +1,30 @@
+@startuml
+
+participant "Plataforma" as PLTF
+participant "task: SeriarCandidaturasAnunciosTask" as SERIARCAND
+autonumber
+-> PLTF: agendaSeriacao()
+activate PLTF
+PLTF -> SERIARCAND** : create()
+PLTF -> PLTF : delay=getDelay()
+PLTF -> PLTF : intervalo=getIntervalo()
+PLTF -> Timer*** : create()
+PLTF -> Timer : schedule(task, delay, intervalo) 
+activate Timer
+deactivate Timer
+deactivate PLTF
+note over PLTF, Timer
+Decorrido o tempo especificado por "delay" e/ou "intervalo"
+end note
+Timer -> SERIARCAND: run ()
+activate SERIARCAND
+activate Timer
+ref over Timer : sd_getProcessoSeriacao
+SERIARCAND -> SERIARCAND: seriarCandidaturasSubmetidas()
+activate SERIARCAND
+deactivate SERIARCAND
+ref over Timer : sd_getProcessoAtribuicao
+SERIARCAND -> SERIARCAND: atribuirCandidaturasSubmetidas()
+activate SERIARCAND
+deactivate SERIARCAND
+@enduml

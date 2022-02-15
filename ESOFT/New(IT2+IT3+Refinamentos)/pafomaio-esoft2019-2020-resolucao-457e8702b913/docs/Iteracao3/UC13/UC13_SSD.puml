@@ -1,0 +1,10 @@
+@startuml
+
+autonumber
+activate Timer
+Timer-> Sistema: inicia o processo automático de seriação e atribuição de candidaturas de anúncio
+activate Sistema
+deactivate Sistema
+deactivate Timer
+
+@enduml

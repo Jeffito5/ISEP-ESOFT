@@ -1,0 +1,75 @@
+@startuml
+participant "ra: RegistoAnuncios" as RA
+participant "ProcessoAtribuicao" as PA
+participant "anu :Anuncio" as ANU
+participant "Plataforma" as PLTF
+participant "Organizacao" as ORG
+participant "tar: Tarefa" as TAR
+participant "class: Candidatura" as CAND
+participant "listaCand :ListaCandidaturas" as LISTCAND
+participant "radj: RegistoAdjudicacao" as RADJ
+participant "adj: Adjudicacao" as ADJ
+title sd_getProcessoAtribuicao
+autonumber
+activate RA
+note right of LISTCAND
+"tipoReg" refere-se a uma instância de TipoRegimento, aquela pela qual rege o Anúncio
+end note
+RA -> RA: getAnuncio(idA)
+RA -> PA** : create()
+activate PA
+loop [Para cada anúncio]
+PA -> ANU: anuncioObrigatorio=validaAnuncio2PrecoMaisBaixo()
+activate ANU
+deactivate ANU
+opt [anuncioObrigatorio==true]
+PA -> ANU: listaCand= getListaCandidaturas()
+activate ANU
+deactivate ANU
+PA -> LISTCAND: lstCand=getCandidaturas()
+activate LISTCAND
+deactivate LISTCAND
+PA -> ANU: an=getCandidaturaByID(idA)
+activate ANU
+deactivate ANU
+PA -> CAND: cdt=getCandidaturaByID(idCdt)
+activate CAND
+deactivate CAND
+PA -> CAND: free=getFreelancer(cdt)
+activate CAND
+deactivate CAND
+PA -> ANU: tar=getTarefa(an)
+activate ANU
+deactivate ANU
+PA -> TAR: desc=getDesc(tarefa)
+activate TAR
+deactivate TAR
+PA -> TAR: perRealizacao= getDuracaoEst(tarefa)
+activate TAR
+deactivate TAR
+PA -> TAR: valor=getValorPretendido()
+activate TAR
+deactivate TAR
+PA -> ORG: emailOrg= getEmailOrg(org)
+activate ORG
+deactivate ORG
+PA -> RADJ: novaAdjudicacao= novoProcessoAtribuicao(emailOrg, free, desc, perRealizacao, valor, an)
+activate RADJ
+RADJ -> RADJ: adjID=geraAdjID()
+RADJ -> RADJ: dataAdj= geraDataAdj()
+RADJ -> ADJ***: create(emailOrg, free, desc, perRealizacao, valor, an, dataAdj)
+deactivate RADJ
+PA -> RADJ: registaAdjudicacao(adj)
+activate RADJ
+RADJ -> RADJ: validaAdjudicacao(adj)
+RADJ -> RADJ: addAdjudicacao(adj)
+deactivate RADJ
+deactivate PA
+deactivate RA
+end opt
+end loop
+
+
+
+
+@enduml

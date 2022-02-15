@@ -1,0 +1,66 @@
+﻿@startuml
+@startuml
+autonumber
+actor "Administrativo" as ADM
+
+participant ":CompetenciaTecnicaUi" as UI
+participant ":CompetenciaTecnicaController" as CTRL
+participant ":Plataforma" as PLAT
+participant "competencia : CompetenciaTecnica" as COMP
+
+activate ADM
+ADM -> UI : Especificar competência técnica
+activate UI
+UI --> ADM : O sistema solicita os dados (código único, descrição detalhada/breve )
+deactivate UI
+
+ADM -> UI : introduz os dados solicitados
+activate UI
+UI -> CTRL : getAreaAtividade()
+activate CTRL
+CTRL -> PLAT: getAreaAtividade()
+activate PLAT
+deactivate PLAT
+deactivate CTRL 
+UI --> ADM : apresneta uma lista de areas de atividades
+deactivate UI
+
+ADM -> UI : Escolhe uma area de atividade
+activate UI
+UI -> CTRL : novaCompetenciaTecnica(cod, dsBreve, dsDet, id: areaAtividade)
+activate CTRL
+CTRL -> PLAT: area = getAreaAtividade( id)
+activate PLAT
+deactivate PLAT
+CTRL -> PLAT:competencia=novaCompetenciaTecnica(cod, dsBreve, dsDet, areaAtividade)
+PLAT --> COMP ** : create(cod, dsBreve,dsDet, areaAtividade)
+deactivate PLAT
+
+CTRL -> PLAT: validaCompetenciaTecnica(competencia)
+activate PLAT
+deactivate PLAT
+
+deactivate CTRL
+UI --> ADM : apresenta dados e solicita confirmação
+deactivate UI
+
+ADM -> UI : confirma
+activate UI
+
+UI -> CTRL: registaCompetenciaTecnica()
+activate CTRL
+CTRL ->PLAT: registaCompetenciaTecnica(competencia)
+activate PLAT
+PLAT -> PLAT: validaCompetenciaTecnica(competencia)
+PLAT -> PLAT: addCompetenciaTecnica(competencia)
+
+deactivate PLAT
+deactivate CTRL
+
+UI --> ADM : operação bem sucedida
+deactivate UI
+
+deactivate ADM
+
+@enduml
+@enduml

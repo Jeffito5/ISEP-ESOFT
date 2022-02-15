@@ -1,0 +1,72 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class CompetenciaTecnica {
+  -String codigo
+  -String descBreve
+  -String descDetalhada
+  +CompetenciaTecnica(String cod, String dsBreve, String dsDet, AreaAtividade at)
+  +novoGrauDeProficiencia(Integer valor, String designacao)
+  +validaGrauDeProficiencia(gdp)
+  +addGrauDeProficiencia(gdp)
+}
+
+class AreaAtividade {
+  -String codigo
+  -String descBreve
+  -String descDetalhada
+  -String GrauDeProficiencia
+
+}
+
+class GrauProficiencia {
+  -Integer valor
+  -String designacao
+  +GrauProficiencia(Integer valor, String designacao)
+
+}
+
+class Plataforma {
+  -String designacao
+  +List<AreaAtividade> getAreasAtividade()
+  +AreaAtividade getAreaAtividadeByCod(String atCod)
+  +RegistoCompetenciasTecnicas getRegistoCompetenciasTecnicas()
+}
+
+class RegistoCompetenciasTecnicas {
+  +CompetenciaTecnica novaCompetencia(String cod, String dsBreve, String dsDet, String atCod)
+  +void validaCompetencia(CompetenciaTecnica ct)
+  +void RegistaCompetencia(CompetenciaTecnica ct)
+  +void addCompetencia(CompetenciaTecnica ct)
+}
+
+class RegistoAreasAtividade {
+  +List<AreaAtividade>getAreasAtividade()
+  +getAreaAtividadeByCod(atCod)
+}
+
+class EspecificarCompetenciaTecnicaController {
+  +List<AreaAtividade> getAreasAtividade()
+  +void novaCompetencia(String cod, String dsBreve, String dsDet, String atCod)
+  +void novoGrauDeProficiencia(Integer valor, String designacao)
+  +void registaCompetencia()
+}
+
+class EspecificarCompetenciaTecnicaUI {
+
+}
+
+EspecificarCompetenciaTecnicaUI ..> EspecificarCompetenciaTecnicaController
+EspecificarCompetenciaTecnicaController ..> Plataforma
+EspecificarCompetenciaTecnicaController ..> RegistoAreasAtividade
+EspecificarCompetenciaTecnicaController ..> RegistoCompetenciasTecnicas
+EspecificarCompetenciaTecnicaController ..> CompetenciaTecnica
+CompetenciaTecnica "*" -> "1" AreaAtividade : referente
+CompetenciaTecnica "*" -> "1" GrauProficiencia : aplica
+Plataforma "1" --> "*" RegistoAreasAtividade : possui
+Plataforma "1" --> "*" RegistoCompetenciasTecnicas : possui
+RegistoAreasAtividade "1" --> "*" AreaAtividade : possui
+RegistoCompetenciasTecnicas "1" --> "*" CompetenciaTecnica : possui
+
+
+@enduml

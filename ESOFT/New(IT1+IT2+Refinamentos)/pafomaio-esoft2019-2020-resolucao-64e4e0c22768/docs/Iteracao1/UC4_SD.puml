@@ -1,0 +1,111 @@
+@startuml
+autonumber
+'hide footbox
+actor "Administrativo" as ADM
+
+participant ":EspecificarCompetenciaTecnicaUI" as UI
+participant ":EspecificarCompetenciaTecnicaController" as CTRL
+participant ":Plataforma" as PLAT
+participant "raa\n:RegistoAreasAtividade" as REGISTO_AREAS
+participant "rct\n:RegistoCompetenciasTecnicas" as REGISTO_COMPETENCIAS
+participant "ct\n:CompetenciaTecnica" as COMPETENCIA
+participant "la\n:List<AreaAtividade>" as LISTA_AREAS
+participant "at\n:AreaAtividade" as AREA
+participant "gdp\n:GrauDeProficiencia" as GRAU
+participant "lgdp\n:ListaGrausDeProficiencia" as LISTA_GRAUS
+
+activate ADM
+ADM -> UI : inicia a especificação de uma competência técnica
+activate UI
+UI --> ADM : solicita os dados \n(cod, dsBreve, dsDet)
+deactivate UI
+
+ADM -> UI : introduz os dados solicitados
+activate UI
+
+UI -> CTRL : la=getAreasAtividade()
+activate CTRL
+
+CTRL -> PLAT : raa=getRegistoAreasAtividade()
+activate PLAT
+
+CTRL -> REGISTO_AREAS : la=getAreasAtividade()
+activate REGISTO_AREAS
+
+
+UI --> ADM : mostra a lista de áreas de atividade e pede para selecionar uma
+deactivate CTRL
+deactivate PLAT
+deactivate UI
+deactivate REGISTO_AREAS
+
+ADM -> UI : seleciona uma área de atividade
+activate UI
+
+UI -> CTRL : novaCompetencia(cod,dsBreve,dsDet,atCod)
+activate CTRL
+
+CTRL -> PLAT: rct=getRegistoCompetenciasTecnicas()
+activate PLAT
+
+CTRL -> REGISTO_AREAS: at=getAreaAtividadeByCod(atCod)
+activate REGISTO_AREAS
+
+CTRL -> REGISTO_COMPETENCIAS: ct=novaCompetencia(cod, dsBreve, dsDet, at)
+activate REGISTO_COMPETENCIAS 
+
+REGISTO_COMPETENCIAS --> COMPETENCIA**: create(cod,dsBreve,dsDet,at)
+activate COMPETENCIA 
+
+
+
+UI --> ADM : solicita os dados necessários para a criação de um grau de proficiência (valor e designação)
+deactivate PLAT
+deactivate CTRL
+deactivate UI
+deactivate REGISTO_AREAS
+deactivate REGISTO_COMPETENCIAS
+deactivate COMPETENCIA
+
+ADM -> UI : introduz os dados solicitados
+activate UI
+UI -> CTRL : novoGrauDeProficiencia(valor, designacao)
+activate CTRL
+
+CTRL -> COMPETENCIA : gdp=novoGrauDeProficiencia(valor, designacao)
+activate COMPETENCIA
+
+COMPETENCIA -> GRAU : create(valor, designacao)
+activate COMPETENCIA
+
+COMPETENCIA -> COMPETENCIA : validaGrauDeProficiencia(gdp)
+COMPETENCIA -> COMPETENCIA : addGrauDeProficiencia(gdp)
+
+UI --> ADM : apresenta os dados e solicita confirmação
+deactivate PLAT
+deactivate CTRL
+deactivate UI
+deactivate REGISTO_AREAS
+deactivate REGISTO_COMPETENCIAS
+deactivate COMPETENCIA
+
+ADM -> UI : confirma os dados 
+activate UI
+
+UI -> CTRL : registaCompetencia()
+activate CTRL
+
+CTRL -> REGISTO_COMPETENCIAS : registoCompetencia(ct)
+activate REGISTO_COMPETENCIAS
+
+REGISTO_COMPETENCIAS -> REGISTO_COMPETENCIAS : validaCompetencia(ct)
+REGISTO_COMPETENCIAS -> REGISTO_COMPETENCIAS : addCompetencia(ct)
+
+UI --> ADM : informa do sucesso da operação
+deactivate REGISTO_COMPETENCIAS
+deactivate CTRL
+deactivate UI
+
+deactivate ADM
+
+@enduml

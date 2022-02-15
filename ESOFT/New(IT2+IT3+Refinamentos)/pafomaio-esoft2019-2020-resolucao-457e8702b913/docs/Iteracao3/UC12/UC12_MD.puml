@@ -1,0 +1,82 @@
+@startuml
+
+skinparam classAttributeIconSize 0
+hide methods
+left to right direction
+
+class Plataforma {
+  -String designacao
+}
+
+class Tarefa {
+  -String referencia
+  -String designaçao
+  -String descInf
+  -String descTecnica
+  -Integer DuraçaoEst
+  -Double custoEst
+
+  }
+
+class Colaborador {
+    -String nome
+    -String função
+    -String telefone
+    -String email
+}
+
+
+class Organização {
+  -String nome
+  -String NIF
+  -String website
+  -String telefone
+  -String email
+  
+  }
+
+class Anuncio
+{
+    -Date dtInicioPublicitacao
+    -Date dtFimPublicitacao
+    -Date dtInicioCandidatura
+    -Date dtFimCandidatura
+    -Date dtInicioSeriacao
+    -Date dtFimSeriacao
+}
+
+class Candidatura
+{
+    -Date dataCandidatura
+    -Double valorPretendido
+    -Integer nrDias
+    -String txtApresentacao
+    -String txtMotivacao
+}
+
+class Freelancer{
+  
+  -String nome
+  -String NIF
+  -String telefone
+  -String email
+}
+
+Plataforma "1" -- "*" Organização : tem registada >
+Plataforma "1" -- "*" Anuncio: publicita >
+Plataforma "1" -- "*" Freelancer: tem/usa >
+
+Organização "1" -- "*" Tarefa: possui >
+Organização "1" -- "1..*" Colaborador: tem >
+
+Tarefa "*" -- "1" Colaborador: especificada por 
+Tarefa "1" -- "0..1" Anuncio: Da origem >
+
+Candidatura "*" -- "1" Freelancer : realizada/removida por >
+
+
+Anuncio "1" -- "0..1" Tarefa: publicita >
+Anuncio "*" -- "1" Colaborador: publicado por >
+Anuncio "1" -- "*" Candidatura: recebe >
+
+@enduml

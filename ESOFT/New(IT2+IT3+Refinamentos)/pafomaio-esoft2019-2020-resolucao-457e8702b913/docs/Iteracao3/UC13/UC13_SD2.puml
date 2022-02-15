@@ -1,0 +1,85 @@
+@startuml
+participant "task: SeriarCandidaturasAnuncioTask" as SERIARCAND
+participant "Plataforma" as PLTF
+participant "ra: RegistoAnuncios" as RA
+participant "lstAnun :List<Anuncio>" as LA
+participant "anu :Anuncio" as ANU
+participant "listaCand :ListaCandidaturas" as LISTCAND
+participant ":ProcessoSeriacao" as PS
+participant "class :Candidatura" as CAND
+participant "rs :RegistoSeriacoes" as RS
+participant "List<Seriacoes>" as LISTSER
+title sd_getProcessoSeriacao
+autonumber
+-> SERIARCAND: ProcessoSeriacao()
+activate SERIARCAND
+
+SERIARCAND -> PLTF: ra=getRegistoAnuncio()
+activate PLTF
+deactivate PLTF
+
+SERIARCAND -> RA: ra=getRegistoAnuncio()
+activate RA
+deactivate RA
+SERIARCAND -> RA: anu=getAnunciosPublicadosPor(anuncioid)
+activate RA
+deactivate RA
+
+loop [Para cada anúncio]
+SERIARCAND -> SERIARCAND: anuncioObrigatorio=validaAnuncio2PrecoMaisBaixo()
+
+opt [anuncioObrigatorio==true]
+
+SERIARCAND -> ANU: listaCand=getListaCandidaturas()
+activate ANU
+deactivate ANU
+SERIARCAND -> LISTCAND: lstCand=getCandidaturas()
+activate LISTCAND
+deactivate LISTCAND
+SERIARCAND -> ANU: ps=getNovoProcessoSeriacao()
+activate ANU
+ANU -> PS**: create(tipoReg)
+deactivate ANU
+note right of PS
+"tipoReg" refere-se a uma instância de TipoRegimento,
+aquela pela qual se rege o Anúncio
+end note 
+SERIARCAND -> LISTCAND: cand=getCandidaturas(candid)
+activate LISTCAND
+deactivate LISTCAND
+SERIARCAND -> PS: addClassificacao=getClassificacao(cand, ordem)
+activate PS
+PS -> CAND*** : class= create(cand, ordem)
+PS -> PS: validaClassificacao(classif)
+PS -> PS: addClassificacao(classif)
+deactivate PS
+SERIARCAND -> ANU: registaProcessoSeriacao(ps)
+activate ANU
+ANU -> ANU: validaProcessoSeriacao(ps)
+ANU -> PS: valida()
+activate PS
+deactivate PS
+ANU -> ANU: setProcessoSeriacao(ps)
+deactivate ANU
+SERIARCAND -> PLTF: rs=getRegistoSeriacoes()
+activate PLTF
+deactivate PLTF
+SERIARCAND -> RS: ls=getListaSeriacoes()
+activate RS
+deactivate RS
+SERIARCAND -> LISTSER: registaSeriacao(cand, classif)
+activate LISTSER
+deactivate LISTSER
+SERIARCAND -> SERIARCAND: sc=seriarCandidaturaAnunciosSubmetidos(cand, classif)
+SERIARCAND -> RA: novoProcessoAtribuicao()
+activate RA
+deactivate RA
+deactivate SERIARCAND
+ref over RA, LA
+UC13_SD_ProcessoAtribuicao
+end ref 
+end opt
+end loop 
+
+
+@enduml
